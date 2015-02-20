@@ -1,22 +1,19 @@
-package android.shadertoy.noahks.com.shadertoy;
+package com.noahks.android.shadertoy;
 
 import android.app.Activity;
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
-import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 
 public class MainActivity extends ActionBarActivity
@@ -116,6 +113,10 @@ public class MainActivity extends ActionBarActivity
          */
         private static final String ARG_SECTION_NUMBER = "section_number";
 
+        private RecyclerView mRecyclerView;
+        private RecyclerView.Adapter mAdapter;
+        private RecyclerView.LayoutManager mLayoutManager;
+
         /**
          * Returns a new instance of this fragment for the given section
          * number.
@@ -135,6 +136,30 @@ public class MainActivity extends ActionBarActivity
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
             View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+
+            mRecyclerView = (RecyclerView) rootView.findViewById(R.id.my_recycler_view);
+
+            // use this setting to improve performance if you know that changes
+            // in content do not change the layout size of the RecyclerView
+            mRecyclerView.setHasFixedSize(true);
+
+            // use a linear layout manager
+            mLayoutManager = new LinearLayoutManager(container.getContext());
+            mRecyclerView.setLayoutManager(mLayoutManager);
+
+            String[][] myDataset = new String[][]{
+                    new String[]{"Tokyo", "Tokyo by night in the rain. The car model is made by Eiffie (Shiny Toy': https://www.shadertoy.com/view/ldsGWB). I have never been in Tokyo btw."},
+                    new String[]{"Fast edge detection", "One thing to keep in mind: The edge detection is sensitive to degenerate or non-continuous SDFs (due to false positives), under-stepping can fix that.", "nimitz" },
+                    new String[]{"Voronoi - hierarchical", "Hierarchical Voronoi. An attempt really.", "iq"},
+                    new String[]{"Remnant X", "Binary subdivision finds the surface really well with this fractal. Two light sources with shadows, and near surface glows. MOUSE X TO TIME WARP [url]https://www.youtube.com/watch?v=BjkK9fLXXo0[/url]", "Dave_Hoskins" },
+                    new String[]{"Trace cone with CRT", "raytrace cone", "cone" },
+            };
+
+            // specify an adapter (see also next example)
+            mAdapter = new MyAdapter(myDataset);
+            mRecyclerView.setAdapter(mAdapter);
+
             return rootView;
         }
 

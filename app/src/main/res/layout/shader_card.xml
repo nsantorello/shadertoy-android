@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.v7.widget.CardView
+        xmlns:card_view="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/card_view"
+        android:layout_gravity="center"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/card_vertical_margin"
+        android:layout_marginBottom="@dimen/card_vertical_margin"
+        android:background="#FFFFFF"
+        card_view:cardCornerRadius="0dp">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginTop="@dimen/card_inner_vertical_margin"
+            android:layout_marginBottom="@dimen/card_inner_vertical_margin">
+
+            <!-- Shader Title -->
+            <TextView
+                android:id="@+id/card_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/card_horizontal_margin"
+                android:layout_marginRight="@dimen/card_horizontal_margin"
+                android:fontFamily="sans-serif-thin"
+                android:textColor="#000000"
+                android:textSize="28sp" />
+
+            <!-- Shader description -->
+            <TextView
+                android:id="@+id/card_description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:textSize="14sp"
+                android:fontFamily="sans-serif-light"
+                android:layout_marginLeft="@dimen/card_horizontal_margin"
+                android:layout_marginRight="@dimen/card_horizontal_margin"
+                android:layout_marginBottom="@dimen/card_inner_vertical_margin" />
+
+            <!-- Shader GL view -->
+            <View
+                android:id="@+id/card_shader"
+                android:layout_width="fill_parent"
+                android:layout_height="200dp"
+                android:background="#000000"/>
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/card_horizontal_margin"
+                android:layout_marginRight="@dimen/card_horizontal_margin"
+                android:layout_marginTop="@dimen/card_inner_vertical_margin">
+
+                <!-- Shader Author's Avatar -->
+                <ImageView
+                    android:id="@+id/card_author_avatar"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:background="#0000FF"/>
+                </LinearLayout>
+            </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>
