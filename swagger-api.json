@@ -1,0 +1,173 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Shadertoy API",
+        "version": "0.1"
+    },
+    "host": "www.shadertoy.com",
+    "basePath": "/api/v1",
+    "schemes": [
+        "https"
+    ],
+    "produces": [
+        "application/json"
+    ],
+    "paths": {
+        "/shaders": {
+            "get": {
+                "summary": "Product Types",
+                "description": "Returns all shaders accessible via the API\n",
+                "parameters": [
+                    {
+                        "name": "key",
+                        "in": "query",
+                        "description": "API access key",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of all shaders in the API",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/ShaderList"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        },
+        "/shaders/{id}": {
+            "get": {
+                "summary": "Product Types",
+                "description": "Returns all shaders accessible via the API\n",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "ID of the shader",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    },
+                    {
+                        "name": "key",
+                        "in": "query",
+                        "description": "API access key",
+                        "required": true,
+                        "type": "string",
+                        "format": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Details of the shader",
+                        "schema": {
+                            "$ref": "#/definitions/Shader"
+                        }
+                    },
+                    "default": {
+                        "description": "Unexpected error",
+                        "schema": {
+                            "$ref": "#/definitions/Error"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "ShaderInfo": {
+            "properties": {
+                "id": {
+                    "type": "string",
+                    "description": "ID of the shader"
+                },
+                "name": {
+                    "type": "string",
+                    "description": "Name of the shader"
+                },
+                "description": {
+                    "type": "string",
+                    "description": "Display name of product."
+                },
+                "username": {
+                    "type": "string",
+                    "description": "Author of the shader"
+                },
+                "date": {
+                    "type": "integer",
+                    "format": "int64",
+                    "description": "UNIX timestamp of the publication date of the shader"
+                },
+                "likes": {
+                    "type": "integer",
+                    "description": "Number of people who have liked this shader"
+                },
+                "viewed": {
+                    "type": "integer",
+                    "description": "Number of people who have viewed this shader"
+                },
+                "tags": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "ShaderRenderpass": {
+            "properties": {
+                "code": {
+                    "type": "string",
+                    "description": "Code for this shader"
+                }
+            }
+        },
+        "Shader": {
+            "properties": {
+                "ver": {
+                    "type": "string",
+                    "description": "API version"
+                },
+                "info": {
+                    "$ref": "#/definitions/ShaderInfo"
+                },
+                "renderpass": {
+                    "$ref": "#/definitions/ShaderRenderpass"
+                }
+            }
+        },
+        "ShaderList": {
+            "properties": {
+                "Shaders": {
+                    "type": "integer",
+                    "description": "The total number of shaders that can be returned for the query"
+                },
+                "Results": {
+                    "type": "array",
+                    "description": "The IDs of the shaders that fit the query",
+                    "items": {
+                        "type": "string"
+                    }
+                }
+            }
+        },
+        "Error": {
+            "properties": {
+                "Error": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
